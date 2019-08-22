@@ -1,0 +1,16 @@
+PODS:
+  - LotameDMP (4.2.0)
+
+DEPENDENCIES:
+  - LotameDMP (~> 4.1)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - LotameDMP
+
+SPEC CHECKSUMS:
+  LotameDMP: fc42efe441f681a0d0fd5ddfae70e60afdfdf747
+
+PODFILE CHECKSUM: e6ebb4c8ab66b5b6babc0631ea1d0f6248441644
+
+COCOAPODS: 1.7.5
