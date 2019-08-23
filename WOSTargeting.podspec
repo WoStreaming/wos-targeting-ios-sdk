@@ -14,7 +14,7 @@ WideOrbit Streaming Targeting SDK allows you to get audio stream url parameters 
   spec.license      = 'MIT'
   spec.author       = { "David Wright" => "dwright@wideorbit.com" }
   spec.source       = { :git => "https://github.com/WoStreaming/wos-targeting-ios-sdk.git", :tag => "0.0.1" }
-  spec.source_files  = "WOSTargeting/**/*{h,m,swift}"
+  spec.source_files  = "WOSTargeting/*.swift"
   spec.ios.framework = 'AdSupport'
   spec.dependency 'LotameDMP', '~> 4.1'
 end
