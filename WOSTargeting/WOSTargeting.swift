@@ -8,7 +8,6 @@
 
 import Foundation
 import AdSupport
-import LotameDMP
 
 struct AppProperties {
     var bundleID: String
@@ -20,43 +19,34 @@ struct DeviceProperties {
     var advertisingIdentifier: String
 }
 
-struct LotameProperties {
-    var lptid: String
-    var ltids = [String]()
-}
-
 public class WOSTargeting {
 
     public static let shared = WOSTargeting()
-    let lotameId = "6394"
     var app: AppProperties
     var device: DeviceProperties
-    var lotame: LotameProperties
-
+    var lotameDMP: ProviderLotame
+    
     private init() {
         self.app = AppProperties(
                 bundleID: "",
                 hasPrivacyPolicy: false
         )
+        
         self.device = DeviceProperties(
                 isAdvertisingTrackingEnabled: false,
                 advertisingIdentifier: ""
         )
-        self.lotame = LotameProperties(
-                lptid: "",
-                ltids: []
-        )
+        
+        self.lotameDMP = ProviderLotame()
     }
 
-    public static func initialize(appHasPrivacyPolicy: Bool) {
+    public static func initialize(clientId: String, appHasPrivacyPolicy: Bool, sendTestProfile: Bool) {
         shared.getAppProperties(hasPrivacyPolicy: appHasPrivacyPolicy)
-        shared.getLotameData()
         shared.getAdvertisingIdentifier()
+        shared.initDMP(clientId: clientId, sendTestProfile: sendTestProfile)
     }
 
     public static func getStreamUrlParams() -> String {
-        let lptid = shared.lotame.lptid
-        let ltids = shared.lotame.ltids.joined(separator: ",")
         let limitedAdTracking = shared.device.isAdvertisingTrackingEnabled ? "0" : "1"
         let advertisingIdentifier = shared.device.advertisingIdentifier
         let bundleIdentifier = shared.app.bundleID
@@ -68,10 +58,10 @@ public class WOSTargeting {
         queryItems.append(URLQueryItem(name: "ifa", value: advertisingIdentifier))
         queryItems.append(URLQueryItem(name: "bundle", value: bundleIdentifier))
         queryItems.append(URLQueryItem(name: "privacypolicy", value: hasPrivacyPolicy))
-
-        if (lptid != "" && ltids.isEmpty == false) {
-            queryItems.append(URLQueryItem(name: "lptid", value: lptid))
-            queryItems.append(URLQueryItem(name: "ltids", value: ltids))
+        
+        let lotameParams = shared.lotameDMP.getParams()
+        if (lotameParams.isEmpty == false) {
+            queryItems += lotameParams
         }
 
         if (queryItems.isEmpty == false) {
@@ -86,24 +76,9 @@ public class WOSTargeting {
         self.app.bundleID = Bundle.main.bundleIdentifier ?? ""
         self.app.hasPrivacyPolicy = hasPrivacyPolicy
     }
-
-    private func getLotameData() {
-        DMP.initialize(self.lotameId)
-        DMP.addBehaviorData(behaviorId: 6322292)
-        DMP.addBehaviorData(behaviorId: 6322303)
-        DMP.sendBehaviorData()
-        DMP.getAudienceData {
-            result in
-            if let profile = result.value {
-//                print("JSON Audience result:" + result.value!.jsonString!)
-                self.lotame.lptid = profile.pid
-                for audience in profile.audiences {
-                    self.lotame.ltids.append(audience.id)
-                }
-            } else {
-                print("Limited ad tracking enabled or incomplete Lotame data received::: \(result)")
-            }
-        }
+    
+    private func initDMP(clientId: String, sendTestProfile: Bool) {
+        self.lotameDMP.initialize(clientId: clientId, sendTestProfile: sendTestProfile)
     }
 
     private func getAdvertisingIdentifier() {

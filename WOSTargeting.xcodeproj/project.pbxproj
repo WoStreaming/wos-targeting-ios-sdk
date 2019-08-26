@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B8CFFBF230DE3F400B350EB /* WOSTargeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8CFFBE230DE3F400B350EB /* WOSTargeting.swift */; };
+		2BE2A3C923146AC1006C422A /* ProviderLotame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE2A3C823146AC1006C422A /* ProviderLotame.swift */; };
 		5E24FF9A52BDE29EEB949BC8 /* Pods_WOSTargeting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87464D0E153131E158EB9A6B /* Pods_WOSTargeting.framework */; };
 /* End PBXBuildFile section */
 
@@ -16,6 +17,7 @@
 		2B8CFFB3230DE23400B350EB /* WOSTargeting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WOSTargeting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B8CFFBE230DE3F400B350EB /* WOSTargeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WOSTargeting.swift; sourceTree = "<group>"; };
 		2B8CFFC0230E01A300B350EB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2BE2A3C823146AC1006C422A /* ProviderLotame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderLotame.swift; sourceTree = "<group>"; };
 		4392363A8A2072A813E092A4 /* Pods-WOSTargeting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WOSTargeting.release.xcconfig"; path = "Target Support Files/Pods-WOSTargeting/Pods-WOSTargeting.release.xcconfig"; sourceTree = "<group>"; };
 		87464D0E153131E158EB9A6B /* Pods_WOSTargeting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WOSTargeting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -55,6 +57,7 @@
 			children = (
 				2B8CFFC0230E01A300B350EB /* Info.plist */,
 				2B8CFFBE230DE3F400B350EB /* WOSTargeting.swift */,
+				2BE2A3C823146AC1006C422A /* ProviderLotame.swift */,
 			);
 			path = WOSTargeting;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BE2A3C923146AC1006C422A /* ProviderLotame.swift in Sources */,
 				2B8CFFBF230DE3F400B350EB /* WOSTargeting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
