@@ -23,7 +23,7 @@ public class WOSTargeting {
     
     public static let shared = WOSTargeting()
     
-    static let readyNotification = Notification.Name("WOSTargetingReadyNotification")
+    public static let readyNotification = Notification.Name("WOSTargetingReadyNotification")
     
     var app: AppProperties
     var device: DeviceProperties
