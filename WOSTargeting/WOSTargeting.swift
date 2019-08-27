@@ -20,38 +20,60 @@ struct DeviceProperties {
 }
 
 public class WOSTargeting {
-
+    
     public static let shared = WOSTargeting()
+    
+//    static let readyNotification = "WOSTargetingReadyNotification"
+    
+    static let readyNotification = Notification.Name("WOSTargetingReadyNotification")
+    
     var app: AppProperties
     var device: DeviceProperties
     var lotameDMP: ProviderLotame
-    
+
     private init() {
         self.app = AppProperties(
-                bundleID: "",
-                hasPrivacyPolicy: false
+            bundleID: "",
+            hasPrivacyPolicy: false
         )
         
         self.device = DeviceProperties(
-                isAdvertisingTrackingEnabled: false,
-                advertisingIdentifier: ""
+            isAdvertisingTrackingEnabled: false,
+            advertisingIdentifier: ""
         )
         
         self.lotameDMP = ProviderLotame()
     }
-
+    
     public static func initialize(clientId: String, appHasPrivacyPolicy: Bool, sendTestProfile: Bool) {
         shared.getAppProperties(hasPrivacyPolicy: appHasPrivacyPolicy)
         shared.getAdvertisingIdentifier()
         shared.initDMP(clientId: clientId, sendTestProfile: sendTestProfile)
     }
 
+    
+    
+//    @objc func onNotification(notification:Notification) {
+//        print("why is the empty: \(notification)")
+//        
+//        let WOParams = WOSTargeting.getStreamUrlParams()
+//        print ("")
+//        print ("WO PARAMS \(WOParams)")
+//        
+//    }
+
+//    @objc static func onNotification(notification:Notification) {
+//        let p = self.getStreamUrlParams()
+//        print("url params: \(p)")
+//    }
+
+    
     public static func getStreamUrlParams() -> String {
         let limitedAdTracking = shared.device.isAdvertisingTrackingEnabled ? "0" : "1"
         let advertisingIdentifier = shared.device.advertisingIdentifier
         let bundleIdentifier = shared.app.bundleID
         let hasPrivacyPolicy = shared.app.hasPrivacyPolicy ? "1" : "0"
-
+        
         var url = URLComponents()
         var queryItems = [URLQueryItem]()
         queryItems.append(URLQueryItem(name: "lmt", value: limitedAdTracking))
@@ -63,24 +85,24 @@ public class WOSTargeting {
         if (lotameParams.isEmpty == false) {
             queryItems += lotameParams
         }
-
+        
         if (queryItems.isEmpty == false) {
             url.queryItems = queryItems
             return url.query!
         }
-
+        
         return ""
     }
-
+    
     private func getAppProperties(hasPrivacyPolicy: Bool) {
         self.app.bundleID = Bundle.main.bundleIdentifier ?? ""
         self.app.hasPrivacyPolicy = hasPrivacyPolicy
     }
     
     private func initDMP(clientId: String, sendTestProfile: Bool) {
-        self.lotameDMP.initialize(clientId: clientId, sendTestProfile: sendTestProfile)
+        self.lotameDMP.initialize(clientId: clientId, sendTestProfile: sendTestProfile, notificationName: WOSTargeting.readyNotification)
     }
-
+    
     private func getAdvertisingIdentifier() {
         let a = ASIdentifierManager.shared()
         self.device.isAdvertisingTrackingEnabled = a.isAdvertisingTrackingEnabled

@@ -16,29 +16,35 @@ struct LotameProperties {
 class ProviderLotame {
     
     var lotame: LotameProperties
-    
+    static var notificationName = Notification.Name("")
     init() {
         self.lotame = LotameProperties(
             lptid: "",
             ltids: []
         )
+//        self.notificationName1 = ""
     }
     
-    public func initialize(clientId: String, sendTestProfile: Bool) {
+    public func initialize(clientId: String, sendTestProfile: Bool, notificationName: Notification.Name) {
         DMP.initialize(clientId)
+        
+        ProviderLotame.notificationName = notificationName
         
         if (sendTestProfile == true) {
             self.submitTestProfile()
         } else {
             self.getTargetingParmsFromLotame()
         }
+        
+        
     }
     
     // Get Lotame targeting query parameters
     public func getParams() -> [URLQueryItem] {
+        
         let lptid = self.lotame.lptid
         let ltids = self.lotame.ltids.joined(separator: ",")
-
+        
         var queryItems = [URLQueryItem]()
         if (lptid != "" && ltids.isEmpty == false) {
             queryItems.append(URLQueryItem(name: "lptid", value: lptid))
@@ -58,6 +64,9 @@ class ProviderLotame {
                 for audience in profile.audiences {
                     self.lotame.ltids.append(audience.id)
                 }
+                
+                NotificationCenter.default.post(name: ProviderLotame.notificationName, object: nil, userInfo:["data": 42, "isImportant": true])
+                
             } else {
                 print("Limited ad tracking enabled or incomplete Lotame data received::: \(result)")
             }
