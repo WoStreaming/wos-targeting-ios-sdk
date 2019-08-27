@@ -23,8 +23,6 @@ public class WOSTargeting {
     
     public static let shared = WOSTargeting()
     
-//    static let readyNotification = "WOSTargetingReadyNotification"
-    
     static let readyNotification = Notification.Name("WOSTargetingReadyNotification")
     
     var app: AppProperties
@@ -50,23 +48,6 @@ public class WOSTargeting {
         shared.getAdvertisingIdentifier()
         shared.initDMP(clientId: clientId, sendTestProfile: sendTestProfile)
     }
-
-    
-    
-//    @objc func onNotification(notification:Notification) {
-//        print("why is the empty: \(notification)")
-//        
-//        let WOParams = WOSTargeting.getStreamUrlParams()
-//        print ("")
-//        print ("WO PARAMS \(WOParams)")
-//        
-//    }
-
-//    @objc static func onNotification(notification:Notification) {
-//        let p = self.getStreamUrlParams()
-//        print("url params: \(p)")
-//    }
-
     
     public static func getStreamUrlParams() -> String {
         let limitedAdTracking = shared.device.isAdvertisingTrackingEnabled ? "0" : "1"

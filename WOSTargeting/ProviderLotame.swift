@@ -2,8 +2,8 @@
 //  ProviderLotame.swift
 //  WOSTargeting
 //
-//  Created by David Wright on 8/26/19.
-//  Copyright © 2019 David Wright. All rights reserved.
+//  Created by WideOrbit on 8/19/19.
+//  Copyright © 2019 WideOrbit. All rights reserved.
 //
 
 import LotameDMP
@@ -15,14 +15,14 @@ struct LotameProperties {
 
 class ProviderLotame {
     
-    var lotame: LotameProperties
     static var notificationName = Notification.Name("")
+    var lotame: LotameProperties
+    
     init() {
         self.lotame = LotameProperties(
             lptid: "",
             ltids: []
         )
-//        self.notificationName1 = ""
     }
     
     public func initialize(clientId: String, sendTestProfile: Bool, notificationName: Notification.Name) {
