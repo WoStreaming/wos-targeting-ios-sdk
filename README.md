@@ -32,8 +32,8 @@ WOSTargeting is a singleton that must be initialized as early as possible in you
 #### Add onNotification function to handle making call to get URL parameters
     
     @objc func onNotification(notification:Notification) {
-        let WOParams = WOSTargeting.getStreamUrlParams()
-        print ("Add these to your stream url \(WOParams)")
+        let targetingQueryItems = WOSTargeting.getURLQueryItems()
+        print ("Add these to your stream url \(targetingQueryItems)")
     }
 
 ## Example using default Xcode ViewController.swift
