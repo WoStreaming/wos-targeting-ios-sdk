@@ -28,7 +28,7 @@ public class WOSTargeting {
     var app: AppProperties
     var device: DeviceProperties
     var lotameDMP: ProviderLotame
-
+    
     private init() {
         self.app = AppProperties(
             bundleID: "",
@@ -49,13 +49,13 @@ public class WOSTargeting {
         shared.initDMP(clientId: clientId, sendTestProfile: sendTestProfile)
     }
     
-    public static func getStreamUrlParams() -> String {
+    // Returns URLQueryItem array
+    public static func getURLQueryItems() -> [URLQueryItem] {
         let limitedAdTracking = shared.device.isAdvertisingTrackingEnabled ? "0" : "1"
         let advertisingIdentifier = shared.device.advertisingIdentifier
         let bundleIdentifier = shared.app.bundleID
         let hasPrivacyPolicy = shared.app.hasPrivacyPolicy ? "1" : "0"
         
-        var url = URLComponents()
         var queryItems = [URLQueryItem]()
         queryItems.append(URLQueryItem(name: "lmt", value: limitedAdTracking))
         queryItems.append(URLQueryItem(name: "ifa", value: advertisingIdentifier))
@@ -66,13 +66,8 @@ public class WOSTargeting {
         if (lotameParams.isEmpty == false) {
             queryItems += lotameParams
         }
-        
-        if (queryItems.isEmpty == false) {
-            url.queryItems = queryItems
-            return url.query!
-        }
-        
-        return ""
+      
+        return queryItems
     }
     
     private func getAppProperties(hasPrivacyPolicy: Bool) {
