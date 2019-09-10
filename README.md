@@ -71,4 +71,4 @@ WOSTargeting is a singleton that must be initialized as early as possible in you
 
 
 #### Example response from WOSTargeting.getStreamUrlParams()
-    https://live.wostreaming.net/manifest/xxxxxxxx-wkrpfmaac-hlsc3.m3u8?lmt=0&ifa=AA762328-E74C-49D0-B386-E646FC3B7301&bundle=com.wideorbit.WOSTargetingExample&privacypolicy=1&lptid=MAA762328-E74C-49D0-B386-E646FC3B7301&ltids=593088,511080,513421,99286)
+    https://live.wostreaming.net/manifest/xxxxxxxx-wkrpfmaac-hlsc3.m3u8?lmt=0&ifa=AA762328-E74C-49D0-B386-E646FC3B7301&bundle=com.wideorbit.WOSTargetingExample&privacypolicy=1&lptid=MAA762328-E74C-49D0-B386-E646FC3B7301&ltids=593088,511080,513421,99286
