@@ -13,7 +13,7 @@ Verify or add the following source statements to your Podfile:
 
 Add the following to your target block:
 
-    pod 'WOSTargeting', '1.0.0'
+    pod 'WOSTargeting', '1.0.1'
 
 ## Usage
 WOSTargeting must be imported by any file using the library.

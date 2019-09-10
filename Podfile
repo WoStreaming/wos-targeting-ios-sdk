@@ -1,4 +1,4 @@
-platform :ios, '12.0'
+platform :ios, '9.0'
 
 target 'WOSTargeting' do
   source 'https://github.com/CocoaPods/Specs.git'
