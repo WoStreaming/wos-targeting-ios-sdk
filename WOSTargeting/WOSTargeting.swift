@@ -43,10 +43,10 @@ public class WOSTargeting {
         self.lotameDMP = ProviderLotame()
     }
     
-    public static func initialize(clientId: String, appHasPrivacyPolicy: Bool, sendTestProfile: Bool) {
+    public static func initialize(clientId: String, appHasPrivacyPolicy: Bool) {
         shared.getAppProperties(hasPrivacyPolicy: appHasPrivacyPolicy)
         shared.getAdvertisingIdentifier()
-        shared.initDMP(clientId: clientId, sendTestProfile: sendTestProfile)
+        shared.initDMP(clientId: clientId)
     }
     
     // Returns URLQueryItem array
@@ -75,8 +75,8 @@ public class WOSTargeting {
         self.app.hasPrivacyPolicy = hasPrivacyPolicy
     }
     
-    private func initDMP(clientId: String, sendTestProfile: Bool) {
-        self.lotameDMP.initialize(clientId: clientId, sendTestProfile: sendTestProfile, notificationName: WOSTargeting.readyNotification)
+    private func initDMP(clientId: String) {
+        self.lotameDMP.initialize(clientId: clientId, notificationName: WOSTargeting.readyNotification)
     }
     
     private func getAdvertisingIdentifier() {
